@@ -1,35 +1,53 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     {% block head %}
-<!--    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">-->
-    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>{% block title %}Movie Library{% endblock %}</title>
     {% endblock %}
   </head>
   <body>
-    {% with messages = get_flashed_messages(category_filter=["info"]) %}
+    <header id="header">
+      <a href="/" class="site-logo">My Movie Library</a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/users">Users</a>
+      </nav>
+    </header>
+
+    <main>
+      {% with messages = get_flashed_messages(category_filter=["info"]) %}
         {% if messages %}
-        <ul class=flashes-info>
+        <ul class="flashes-info">
         {% for message in messages %}
-        <li>{{ message }}</li>
+          <li>{{ message }}</li>
         {% endfor %}
         </ul>
         {% endif %}
-        {% endwith %}
-    {% with errors = get_flashed_messages(category_filter=["error"]) %}
+      {% endwith %}
+
+      {% with errors = get_flashed_messages(category_filter=["error"]) %}
         {% if errors %}
-        <ul class=flashes-error>
+        <ul class="flashes-error">
         {% for error in errors %}
-        <li>{{ error }}</li>
+          <li>{{ error }}</li>
         {% endfor %}
         </ul>
         {% endif %}
-        {% endwith %}
-    <div id="content">{% block content %}{% endblock %}</div>
-    <div id="footer">
+      {% endwith %}
+
+      <div id="content" class="container">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+    <footer id="footer">
       {% block footer %}
-      &copy; Copyright 2010 by <a href="http://domain.invalid/">you</a>.
+      &copy; Copyright 2025 by <a href="/">My Movie Library</a>
       {% endblock %}
-    </div>
+    </footer>
   </body>
 </html>

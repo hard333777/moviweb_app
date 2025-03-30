@@ -138,9 +138,8 @@ def operational_error(e):
 
 
 @app.get('/')
-#TODO create home page
 def home():
-    pass
+    return render_template('home.html')
 
 
 @app.get('/users')

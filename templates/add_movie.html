@@ -3,14 +3,14 @@
   {{ super() }}
 {% endblock %}
 {% block content %}
-    <div class="container form-container">
-      <h2>Add New Movie</h2>
-      <form action="add_movie" method="post">
-        <label for="title">Movie title</label>
-        <input type="text" id="title" name="title" required>
-        <input type="submit" value="Add movie">
-      </form>
-    </div>
+  <div class="form-container">
+    <h2>Add New Movie</h2>
+    <form action="add_movie" method="post">
+      <label for="title">Movie title</label>
+      <input type="text" id="title" name="title" required>
+      <input type="submit" value="Add movie">
+    </form>
+  </div>
 {% endblock %}
 {% block footer %}
     {{ super() }}
