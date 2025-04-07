@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <div class="container">
+    <h1>Movies special for you</h1>
+
+    <div class="action-buttons">
+      <form action="get_recommendations" method="post">
+        <input type="hidden" name="mood" value="{{mood}}">
+        <button type="submit" class="btn btn-success refresh-button">New recommendations</button>
+      </form>
+      <a href="/users/{{user_id}}/get_recommendations" class="btn">Change mood</a>
+      <a href="/users/{{user_id}}" class="btn btn-secondary">Back to my movies</a>
+    </div>
+
+    <div class="movies-grid">
+      {% for movie in recommendations %}
+      {% if movie %}
+      <article class="movie-item">
+        <div class="movie">
+          {% if movie.poster %}
+          <img class="movie-poster" src="{{movie.poster}}" alt="{{movie.title}} poster">
+          {% else %}
+          <div class="movie-poster" aria-label="No poster available">MOVIE POSTER</div>
+          {% endif %}
+          <div class="movie-content">
+            <h3 class="movie-title">{{movie.title}}</h3>
+            {% if movie.comment %}
+            <div class="movie-comment">{{movie.comment}}</div>
+            {% endif %}
+          </div>
+          <div class="movie-actions">
+            <form action="/users/{{user_id}}/add_movie_rec" method="post">
+              <input type="hidden" name="title" value="{{movie.title}}">
+              <button type="submit" class="btn btn-small">Add to library</button>
+            </form>
+          </div>
+        </div>
+      </article>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

@@ -3,15 +3,22 @@
   {{ super() }}
 {% endblock %}
 {% block content %}
-    <div class="container form-container">
+  <div class="container">
+    <div class="form-container">
       <h2>Add New User</h2>
-      <form action="/add_user" method="post">
-        <label for="name">Your name</label>
-        <input type="text" id="name" name="name" required>
-        <input type="submit" value="Add user">
+      <form action="/add_user" method="post" class="user-form">
+        <div class="form-group">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required aria-required="true">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn">Add user</button>
+          <a href="/users" class="btn btn-secondary">Back to users</a>
+        </div>
       </form>
     </div>
+  </div>
 {% endblock %}
 {% block footer %}
-    {{ super() }}
+  {{ super() }}
 {% endblock %}

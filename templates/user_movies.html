@@ -3,38 +3,45 @@
   {{ super() }}
 {% endblock %}
 {% block content %}
-  <h1>Your Movie Collection</h1>
-  <a href="add_movie" class="add-user-link">Add a new movie</a>
-
-  <div class="movies-grid">
-    {% for movie in movies %}
-    <div class="movie-item">
-      <div class="movie">
-        {% if movie.poster %}
-        <img class="movie-poster" src="{{movie.poster}}" alt="{{movie.title}} poster">
-        {% else %}
-        <div class="movie-poster">MOVIE POSTER</div>
-        {% endif %}
-        <div class="movie-title">{{movie.title}}</div>
-        {% if movie.year %}
-        <div class="movie-year">{{movie.year}}</div>
-        {% endif %}
-        {% if movie.rating %}
-        <div class="movie-rating">Rating: {{movie.rating}}/10</div>
-        {% endif %}
-        {% if movie.director %}
-        <div class="movie-director">Director: {{movie.director}}</div>
-        {% endif %}
-        <div class="update">
-          <a href="update_movie/{{movie.id}}" class="btn btn-small">Update</a>
-        </div>
-        <div class="delete">
-          <form action="delete_movie/{{movie.id}}" method="post">
-            <input type="submit" value="Delete" class="btn btn-small">
-          </form>
-        </div>
+  <div class="container">
+    <div class="content-header">
+      <h1>Your Movie Collection</h1>
+      <div class="action-links">
+        <a href="add_movie" class="btn">Add a new movie</a>
+        <a href="get_recommendations" class="btn">Discover movies</a>
       </div>
     </div>
-    {% endfor %}
+
+    <div class="movies-grid">
+      {% for movie in movies %}
+      <article class="movie-item">
+        <div class="movie">
+          {% if movie.poster %}
+          <img class="movie-poster" src="{{movie.poster}}" alt="{{movie.title}} poster">
+          {% else %}
+          <div class="movie-poster" aria-label="No poster available">MOVIE POSTER</div>
+          {% endif %}
+          <div class="movie-content">
+            <h3 class="movie-title">{{movie.title}}</h3>
+            {% if movie.year %}
+            <div class="movie-year">{{movie.year}}</div>
+            {% endif %}
+            {% if movie.rating %}
+            <div class="movie-rating">Rating: {{movie.rating}}/10</div>
+            {% endif %}
+            {% if movie.director %}
+            <div class="movie-director">Director: {{movie.director}}</div>
+            {% endif %}
+          </div>
+          <div class="movie-actions">
+            <a href="update_movie/{{movie.id}}" class="btn btn-small">Update</a>
+            <form action="delete_movie/{{movie.id}}" method="post">
+              <button type="submit" class="btn btn-small btn-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
   </div>
 {% endblock %}

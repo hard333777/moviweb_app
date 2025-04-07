@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="form-container">
+      <h2>Choose your mood</h2>
+      <div class="mood-grid">
+        <div class="mood-button">
+          <form action="get_recommendations" method="post">
+            <button type="submit" name="mood" value="Excited" class="mood-btn">
+              <span class="mood-emoji" aria-hidden="true">🤩</span>
+              <span>Excited</span>
+            </button>
+          </form>
+        </div>
+        <div class="mood-button">
+          <form action="get_recommendations" method="post">
+            <button type="submit" name="mood" value="Curious" class="mood-btn">
+              <span class="mood-emoji" aria-hidden="true">🕵️‍♂️</span>
+              <span>Curious</span>
+            </button>
+          </form>
+        </div>
+        <div class="mood-button">
+          <form action="get_recommendations" method="post">
+            <button type="submit" name="mood" value="Upset" class="mood-btn">
+              <span class="mood-emoji" aria-hidden="true">😔</span>
+              <span>Upset</span>
+            </button>
+          </form>
+        </div>
+        <div class="mood-button">
+          <form action="get_recommendations" method="post">
+            <button type="submit" name="mood" value="Playful" class="mood-btn">
+              <span class="mood-emoji" aria-hidden="true">😆</span>
+              <span>Playful</span>
+            </button>
+          </form>
+        </div>
+        <div class="mood-button">
+          <form action="get_recommendations" method="post">
+            <button type="submit" name="mood" value="Thoughtful" class="mood-btn">
+              <span class="mood-emoji" aria-hidden="true">🤔</span>
+              <span>Thoughtful</span>
+            </button>
+          </form>
+        </div>
+        <div class="mood-button">
+          <form action="get_recommendations" method="post">
+            <button type="submit" name="mood" value="Nostalgic" class="mood-btn">
+              <span class="mood-emoji" aria-hidden="true">🥹</span>
+              <span>Nostalgic</span>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="form-actions">
+        <a href="/users/{{user_id}}" class="btn btn-secondary">Back to my movies</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block footer %}
+  {{ super() }}
+{% endblock %}

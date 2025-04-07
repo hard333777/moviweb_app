@@ -3,32 +3,44 @@
   {{ super() }}
 {% endblock %}
 {% block content %}
-    <div class="container form-container">
+  <div class="container">
+    <div class="form-container">
       <h2>Update Movie</h2>
-      <form action="{{movie.id}}" method="post">
-        <label for="title">Title</label>
-        <input type="text" id="title" name="title" value="{{movie.title}}" required>
-        <label for="director">Director</label>
-        <input type="text" id="director" name="director"
-               {% if movie.director %} value="{{movie.director}}" {% else %} value="">
-        {% endif %}
-        <label for="year">Year</label>
-        <input type="number" id="year" name="year"
-               {% if movie.year %} value="{{movie.year}}" {% else %} value="">
-        {% endif %}
-        <label for="rating">Rating</label>
-        <input type="text" id="rating" name="rating"
-               {% if movie.rating %} value="{{movie.rating}}" {% else %} value="">
-        {% endif %}
-        <label for="poster">Poster</label>
-        <input type="text" id="poster" name="poster"
-               {% if movie.poster %}value="{{movie.poster}}" {% else %} value="">
-        {% endif %}
-        <br><br>
-        <input type="submit" value="Update">
+      <form action="{{movie.id}}" method="post" class="movie-form">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" value="{{movie.title}}" required aria-required="true">
+        </div>
+
+        <div class="form-group">
+          <label for="director">Director</label>
+          <input type="text" id="director" name="director"{% if movie.director %} value="{{movie.director}}"{% else %} value=""{% endif %}>
+        </div>
+
+        <div class="form-group">
+          <label for="year">Year</label>
+          <input type="number" id="year" name="year"{% if movie.year %} value="{{movie.year}}"{% else %} value=""{% endif %} min="1888" max="2025">
+        </div>
+
+        <div class="form-group">
+          <label for="rating">Rating</label>
+          <input type="text" id="rating" name="rating"{% if movie.rating %} value="{{movie.rating}}"{% else %} value=""{% endif %} pattern="[0-9](\.[0-9])?" aria-describedby="rating-help">
+          <small id="rating-help" class="form-help">Rating from 0 to 10</small>
+        </div>
+
+        <div class="form-group">
+          <label for="poster">Poster URL</label>
+          <input type="url" id="poster" name="poster"{% if movie.poster %} value="{{movie.poster}}"{% else %} value=""{% endif %} placeholder="https://example.com/poster.jpg">
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn">Update</button>
+          <a href="/users/{{movie.user_id}}" class="btn btn-secondary">Back to my movies</a>
+        </div>
       </form>
     </div>
+  </div>
 {% endblock %}
 {% block footer %}
-    {{ super() }}
+  {{ super() }}
 {% endblock %}

@@ -10,44 +10,48 @@
     {% endblock %}
   </head>
   <body>
-    <header id="header">
-      <a href="/" class="site-logo">My Movie Library</a>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/users">Users</a>
-      </nav>
-    </header>
+    <div class="page-container">
+      <header id="header">
+        <a href="/" class="site-logo">My Movie Library</a>
+        <nav>
+          <ul class="nav-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/users">Users</a></li>
+          </ul>
+        </nav>
+      </header>
 
-    <main>
-      {% with messages = get_flashed_messages(category_filter=["info"]) %}
-        {% if messages %}
-        <ul class="flashes-info">
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-        {% endif %}
-      {% endwith %}
+      <main class="main-content">
+        {% with messages = get_flashed_messages(category_filter=["info"]) %}
+          {% if messages %}
+          <ul class="flashes-info" role="alert" aria-live="polite">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+          {% endif %}
+        {% endwith %}
 
-      {% with errors = get_flashed_messages(category_filter=["error"]) %}
-        {% if errors %}
-        <ul class="flashes-error">
-        {% for error in errors %}
-          <li>{{ error }}</li>
-        {% endfor %}
-        </ul>
-        {% endif %}
-      {% endwith %}
+        {% with errors = get_flashed_messages(category_filter=["error"]) %}
+          {% if errors %}
+          <ul class="flashes-error" role="alert" aria-live="assertive">
+          {% for error in errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+          </ul>
+          {% endif %}
+        {% endwith %}
 
-      <div id="content" class="container">
-        {% block content %}{% endblock %}
-      </div>
-    </main>
+        <div id="content">
+          {% block content %}{% endblock %}
+        </div>
+      </main>
 
-    <footer id="footer">
-      {% block footer %}
-      &copy; Copyright 2025 by <a href="/">My Movie Library</a>
-      {% endblock %}
-    </footer>
+      <footer id="footer">
+        {% block footer %}
+        &copy; Copyright 2025 by <a href="/">My Movie Library</a>
+        {% endblock %}
+      </footer>
+    </div>
   </body>
 </html>

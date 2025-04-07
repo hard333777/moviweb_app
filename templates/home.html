@@ -2,11 +2,13 @@
 {% block title %}Movie Library{% endblock %}
 {% block content %}
 <div class="container">
-  <h1>Welcome to Your Movie Library</h1>
-  <p>Manage your favorite movies with ease.</p>
-  <div style="margin-top: 20px;">
-    <a href="/users" class="btn">Browse Users</a>
-    <a href="/add_user" class="btn">Add User</a>
+  <div class="home-content">
+    <h1>Welcome to Your Movie Library</h1>
+    <p>Manage your favorite movies with ease.</p>
+    <div class="home-actions">
+      <a href="/users" class="btn">Browse Users</a>
+      <a href="/add_user" class="btn">Add User</a>
+    </div>
   </div>
 </div>
 {% endblock %}

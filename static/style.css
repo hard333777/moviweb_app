@@ -1,4 +1,6 @@
-/* General Styles */
+/* -----------------------------
+   General Styles & Variables
+   ----------------------------- */
 :root {
   --dark-bg: #1a1a1a;
   --darker-bg: #121212;
@@ -7,8 +9,35 @@
   --accent-color: #5c5cff;
   --button-color: #5c5cff;
   --button-hover: #4646ff;
+  --button-danger: #dc3545;
+  --button-danger-hover: #c82333;
+  --button-secondary: #6c757d;
+  --button-secondary-hover: #5a6268;
   --card-bg: #252525;
   --border-color: #333333;
+  --success-color: #28a745;
+  --success-hover: #218838;
+  --form-bg: rgba(0, 0, 0, 0.2);
+  --focus-color: #7f7fff;
+  --focus-shadow: 0 0 0 0.2rem rgba(92, 92, 255, 0.25);
+}
+
+/* Reset and base styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Page layout for sticky footer */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 body {
@@ -17,11 +46,11 @@ body {
   color: var(--light-text);
   margin: 0;
   padding: 0;
-  min-height: 100vh;
   line-height: 1.6;
 }
 
 .container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
@@ -36,7 +65,32 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Typography */
+/* Align headings and buttons with container */
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.content-header h1,
+.content-header h2 {
+  margin: 0;
+}
+
+.users-page-header h1 {
+  margin-left: 180px;
+}
+
+.users-page-header .btn {
+  margin-right: 180px;
+}
+
+/* -----------------------------
+   Typography
+   ----------------------------- */
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -51,6 +105,13 @@ h2 {
   color: var(--light-text);
 }
 
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--light-text);
+}
+
 p {
   font-size: 1rem;
   color: var(--secondary-text);
@@ -60,14 +121,21 @@ p {
 a {
   color: var(--accent-color);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 a:hover {
   color: var(--button-hover);
 }
 
-/* Header & Navigation */
+a:focus {
+  outline: none;
+  box-shadow: var(--focus-shadow);
+}
+
+/* -----------------------------
+   Header & Navigation
+   ----------------------------- */
 #header {
   display: flex;
   justify-content: space-between;
@@ -77,35 +145,37 @@ a:hover {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
-#header a.btn {
+.site-logo {
+  font-weight: 600;
+  font-size: 1.3rem;
   color: var(--light-text);
-  background-color: transparent;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  transition: background-color 0.2s;
 }
 
-#header a.btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Navigation */
-nav {
+.nav-list {
   display: flex;
-  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 25px;
 }
 
 nav a {
-  margin-left: 25px;
   color: var(--light-text);
   font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 5px;
 }
 
-/* Movie Grid */
+nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* -----------------------------
+   Movie Grid
+   ----------------------------- */
 .movies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 25px;
   margin-top: 30px;
 }
@@ -116,6 +186,9 @@ nav a {
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .movie-item:hover {
@@ -141,45 +214,96 @@ nav a {
   font-size: 1.2rem;
 }
 
+.movie-content {
+  flex: 1;
+  padding: 15px;
+}
+
 .movie-title {
   font-weight: 600;
-  padding: 12px 15px 5px;
-  font-size: 1rem;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
 }
 
-.movie-year, .movie-rating, .movie-director {
-  padding: 0 15px;
+.movie-year,
+.movie-rating,
+.movie-director,
+.movie-comment {
   color: var(--secondary-text);
   font-size: 0.9rem;
+  margin-top: 4px;
 }
 
-/* Forms */
-form {
+.movie-actions {
   display: flex;
-  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  border-top: 1px solid var(--border-color);
+}
+
+.movie-actions form {
+  flex: 1;
+}
+
+.movie-actions .btn,
+.movie-actions button {
+  width: 100%;
+}
+
+/* -----------------------------
+   Forms & Buttons
+   ----------------------------- */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 label {
+  display: block;
   margin-bottom: 8px;
   font-weight: 500;
   color: var(--secondary-text);
 }
 
-input[type="text"], 
-input[type="number"], 
+input[type="text"],
+input[type="number"],
+input[type="url"],
 select {
   padding: 12px 15px;
-  margin-bottom: 20px;
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--form-bg);
   color: var(--light-text);
   font-size: 1rem;
+  width: 100%;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-input[type="submit"], 
-.btn {
-  padding: 12px 20px;
+input:focus,
+select:focus {
+  border-color: var(--focus-color);
+  outline: 0;
+  box-shadow: var(--focus-shadow);
+}
+
+.form-help {
+  display: block;
+  margin-top: 5px;
+  color: var(--secondary-text);
+  font-size: 0.85rem;
+}
+
+.btn,
+button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
   background-color: var(--button-color);
   color: white;
   border: none;
@@ -187,15 +311,21 @@ input[type="submit"],
   cursor: pointer;
   font-weight: 600;
   font-size: 0.95rem;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.1s;
   text-align: center;
-  display: inline-block;
+  line-height: 1.5;
 }
 
-input[type="submit"]:hover, 
-.btn:hover {
+.btn:hover,
+button[type="submit"]:hover {
   background-color: var(--button-hover);
-  color: white; /* Explicitly set hover text color to white */
+  color: white;
+  transform: translateY(-1px);
+}
+
+.btn:active,
+button[type="submit"]:active {
+  transform: translateY(1px);
 }
 
 .btn-small {
@@ -203,7 +333,38 @@ input[type="submit"]:hover,
   font-size: 0.85rem;
 }
 
-/* User List */
+.btn-success {
+  background-color: var(--success-color);
+}
+
+.btn-success:hover {
+  background-color: var(--success-hover);
+}
+
+.btn-danger {
+  background-color: var(--button-danger);
+}
+
+.btn-danger:hover {
+  background-color: var(--button-danger-hover);
+}
+
+.btn-secondary {
+  background-color: var(--button-secondary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--button-secondary-hover);
+}
+
+/* -----------------------------
+   User List
+   ----------------------------- */
+.users-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .user-item {
   display: flex;
   justify-content: space-between;
@@ -223,37 +384,21 @@ input[type="submit"]:hover,
   font-weight: 500;
   color: var(--light-text);
   text-decoration: none;
+  padding: 5px;
 }
 
-/* Add Movie/User Links */
-.add-user-link {
-  display: inline-block;
-  margin-bottom: 20px;
-  padding: 10px 15px;
-  background-color: var(--accent-color);
-  color: white;
-  border-radius: 6px;
-  font-weight: 500;
-  transition: background-color 0.2s;
+.user-link:hover {
+  text-decoration: underline;
 }
 
-.add-user-link:hover {
-  background-color: var(--button-hover);
-  color: white; /* Explicitly set hover text color to white */
-}
-
-/* Update and Delete buttons */
-.update, .delete {
-  padding: 10px 15px;
-}
-
-/* Flash Messages - Updated */
-.flashes-info, .flashes-error {
+/* Flash Messages */
+.flashes-info,
+.flashes-error {
   list-style: none;
   padding: 15px 20px;
   margin: 20px auto;
   border-radius: 6px;
-  max-width: 600px;
+  max-width: 800px;
   text-align: center;
 }
 
@@ -269,30 +414,109 @@ input[type="submit"]:hover,
   color: #f8d7da;
 }
 
-/* Footer */
+/* -----------------------------
+   Footer
+   ----------------------------- */
 #footer {
-  margin-top: 60px;
   padding: 20px;
   text-align: center;
   color: var(--secondary-text);
   font-size: 0.9rem;
   border-top: 1px solid var(--border-color);
-}
-
-/* Popular Movies Section */
-.popular-movies {
   margin-top: 40px;
+  flex-shrink: 0;
 }
 
-.popular-movies h2 {
-  margin-bottom: 25px;
-  font-size: 1.8rem;
+/* -----------------------------
+   Mood Selection
+   ----------------------------- */
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
 }
 
-/* Responsive adjustments */
+.mood-button {
+  margin-bottom: 0;
+}
+
+.mood-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  font-size: 1.1rem;
+  background-color: var(--button-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.mood-btn:hover {
+  background-color: var(--button-hover);
+  transform: translateY(-2px);
+}
+
+.mood-btn:active {
+  transform: translateY(1px);
+}
+
+.mood-emoji {
+  font-size: 1.5rem;
+  margin-right: 8px;
+}
+
+/* -----------------------------
+   Recommendation Controls
+   ----------------------------- */
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+/* Green glow animation for new recommendations button */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px var(--success-color);
+  }
+  50% {
+    box-shadow: 0 0 15px var(--success-color);
+  }
+  100% {
+    box-shadow: 0 0 5px var(--success-color);
+  }
+}
+
+.refresh-button {
+  animation: glow 2s infinite;
+}
+
+/* Home page specific */
+.home-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+.home-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* -----------------------------
+   Responsive Styles
+   ----------------------------- */
 @media (max-width: 768px) {
   .movies-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 15px;
   }
 
@@ -303,42 +527,102 @@ input[type="submit"]:hover,
   h2 {
     font-size: 1.5rem;
   }
+
+  #header {
+    padding: 15px 20px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav-list {
+    margin-top: 15px;
+    justify-content: center;
+  }
+
+  .content-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .users-page-header h1,
+  .users-page-header .btn {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons form,
+  .action-buttons .btn {
+    width: 100%;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+
+  .home-actions {
+    flex-direction: column;
+  }
+
+  .mood-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-/* Search bar styling from the mockup */
-.search-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
+@media (max-width: 480px) {
+  .form-container {
+    padding: 20px 15px;
+  }
+
+  .user-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .delete-user {
+    width: 100%;
+  }
+
+  .delete-user button[type="submit"] {
+    width: 100%;
+  }
+
+  .mood-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .movie-actions {
+    flex-direction: column;
+  }
 }
 
-.search-bar {
-  width: 100%;
-  padding: 15px 20px 15px 50px;
-  background-color: #252525;
-  border: 1px solid #333;
-  border-radius: 100px;
-  color: white;
-  font-size: 1rem;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%23999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>');
-  background-repeat: no-repeat;
-  background-position: 15px center;
+/* Accessibility improvements */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-/* Collection Button */
-.collection-btn {
-  display: inline-block;
-  background-color: var(--button-color);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 6px;
-  margin-top: 10px;
-  text-align: center;
-  font-weight: 500;
-  transition: background-color 0.2s;
-}
-
-.collection-btn:hover {
-  background-color: var(--button-hover);
-  color: white; /* Explicitly set hover text color to white */
+/* Focus visible for keyboard navigation */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
 }
